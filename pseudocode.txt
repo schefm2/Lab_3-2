@@ -1,0 +1,15 @@
+compiler directives
+	#include <c8051_SDCC.h>
+	#include <stdio.h>
+	#include <i2c.h>
+	
+declare global variables
+
+	
+function prototypes
+
+
+main function
+End main function
+		
+Functions
