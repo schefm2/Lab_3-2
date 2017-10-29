@@ -1,24 +1,3 @@
-Ranger I2C addr: 0xE0;
-//ranger's cap is polarized
-
-Compass I2C addr: 0xC0;
-//use 12-bit resolution
-write registers 2&3 H&L - bitshift high, OR mask in low byte
-
-
-Ranger:
-Writing to 0x51 to register 0 starts ping and stores range in cm
-Wait for echo (~100ms)
-Ranger has wide area of refletion acceptance
-read data and ping right away; first read bad, nobody cares
-
-
-master controls clock slaves use
-call SMB0_Init();
-
-
-
-
 Psuedocode
 
 compiler directives
