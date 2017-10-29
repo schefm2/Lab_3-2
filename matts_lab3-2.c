@@ -19,6 +19,8 @@ unsigned char h_count;			//Keeps track of how many PCA interrupts occurred (rese
 unsigned char read_counter;		//Keeps track of how many compass reads have occurred
 unsigned char new_heading;		//Flag used to keep 40 ms between compass readings
 unsigned int heading;			//Stores the value of 0 to 3599 returned by the electronic compass
+unsigned char Vers[1];
+unsigned char ver_number;
 //-----------------------------------------------------------------------------
 // Main Function
 //-----------------------------------------------------------------------------
@@ -40,7 +42,11 @@ void main(void)
 	new_heading = 0;
 	read_counter = 0;
 	heading = 0;
-	
+
+	i2c_read_data(0xC0, 0, Vers, 1);
+	ver_number = Vers[0];
+	printf("The compass's version number is %d\r\n", Vers[0]);
+
 	while(1)
 	{
 		if (new_heading) 				//Enough overflows for a new heading
@@ -84,7 +90,7 @@ void XBR0_Init()
 //
 void SMB_Init()
 {
-	SMB0CR = 0x99;	//Sets SCL to 100 kHz (closer than 0x93 to actual 100 kHz)
+	SMB0CR = 0x93;	//Sets SCL to 100 kHz (actually ~94594 Hz)
 	ENSMB = 1;		//Enables SMB
 }
 //-----------------------------------------------------------------------------
